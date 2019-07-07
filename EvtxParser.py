@@ -35,6 +35,24 @@ class Summary:
         return ms
 
 
+class EvtxAnalyser:
+    def __init__(self, key, process):
+        self.key = key
+        self.process = process
+        self.value = ""
+        self.summary = {}
+
+    def record_analysis(self, record):
+        self.value = record["Event"]["System"]["EventID"]["#text"]
+        if self.value in self.summary:
+            self.summary[self.value] += 1
+        else:
+            self.summary[self.value] = 1
+
+    def serch_process(self, record):
+        print()
+
+
 def export(out, data):
     if out.split(".")[-1] == "json":
         JsonFormat(args.out, data, "a")
@@ -45,18 +63,18 @@ def export(out, data):
         sys.exit()
 
 
-def serchvalue(record, val):
+def serchvalue(record, key, val):
     print("Searching start {}".format(val))
-
 
 
 def get_args():
     parser = ArgumentParser(description="Analyse and Convert Evtx File.")
 
-    parser.add_argument("evtx", type=str, help="Path to the Windows Evtx (event log file[.evtx])")
-    parser.add_argument("-o", "--out", type=str, help="export file format (.json, .xml)")
-    parser.add_argument("--search", type=str, help="search value")
-    parser.add_argument("--summary", action="store_true", help="Calculate statistical information based on Event ID")
+    parser.add_argument("evtx", type=str, help="Path to the Windows Evtx. (event log file[.evtx])")
+    parser.add_argument("-o", "--out", type=str, help="export file format. (.json, .xml)")
+    parser.add_argument("--search", type=str, help="search value.")
+    parser.add_argument("--summary", action="store_true", help="Calculate statistical information based on Event ID.")
+    parser.add_argument("-a", "--analysis" ,type=str, help="Select analysis type. (Event ID, Application)")
 
     args = parser.parse_args()
 
@@ -65,29 +83,33 @@ def get_args():
 
 def dump_evtx(args):
     summary = Summary()
+    event_summary = EvtxAnalyser("EventID", "d")
 
     with evtx.Evtx(args.evtx) as log:
         record_buf = e_views.XML_HEADER
         record_buf += "<Events>"
         for record in log.records():
             record_num = summary.add_record()
-            sys.stdout.write("\rAnalysing %d record now" % record_num)
+
+            sys.stdout.write("\rAnalysing %d record now..." % record_num)
             sys.stdout.flush()
             time.sleep(0.001)
 
             evtx_dict = xmltodict.parse(record.xml())
+            event_summary.record_analysis(evtx_dict)
             if args.out is not None:
                 export(args.out, evtx_dict)
 
-    return summary
+    return summary, event_summary
 
 
 def main(args):
-    summary = dump_evtx(args)
+    (summary, event_summary) = dump_evtx(args)
     sys.stdout.write("\n")
 
     summary.print_time()
     print("total record is {}".format(summary.total_record))
+    print(event_summary.summary)
 
 
 if __name__ == "__main__":
