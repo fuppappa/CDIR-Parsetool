@@ -17,7 +17,6 @@ class JsonConverter:
             with open(self.jsn_path, 'r') as fd:
                 data = json.load(fd)
         except json.JSONDecodeError as e:
-
             print(sys.exc_info())
             print(e)
             return False
@@ -48,7 +47,7 @@ def Shaping_Json(res, out):
 
         return False
 
-    
+
 def Shaping_Json2(res, out):
     with open(out, "a") as fd:
 
@@ -57,6 +56,19 @@ def Shaping_Json2(res, out):
             if jd == "null":
                 continue
             json.dump(jd, fd, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
+
+
+def loadJson2(res):
+    for line in open(res, "r", encoding="utf-8"):
+        try:
+            jd = json.loads(line)
+            if jd == "null":
+                continue
+        except json.JSONDecodeError as e:
+            print(sys.exc_info())
+            print(e)
+            return False
+        yield jd
 
 
 def get_args():
