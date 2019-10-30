@@ -35,10 +35,10 @@ class Summary:
 class PlasoGeneralLogParser():
     """plaso general parser"""
 
-    CONTAINER_VALUE = {"container_type": "__container_type__", "type": "__type__", "data_type": "data_type",
-                       "display_name": "display_name", "offset": "offset", "parser": "parser",
-                       "pathspec": "pathspec", "hash": "sha256_hash", "time_stamp": "timestamp",
-                       "time_dsec": "timestamp_dsec"}
+    GENERAL_CONTAINER_VALUE = {"container_type": "__container_type__", "type": "__type__", "data_type": "data_type",
+                               "display_type": "display_name", "offset": "offset", "parser": "parser",
+                               "pathspec": "pathspec", "hash": "sha256_hash", "time_stamp": "timestamp",
+                               "time_dsec": "timestamp_desc"}
 
     TIMEZONE = JST
 
@@ -51,7 +51,6 @@ class PlasoGeneralLogParser():
         self.parser = self.GetEventContainerValue(event, "parser")
         self.pathspec = self.GetEventContainerValue(event, "pathspec")
         self.hash = self.GetEventContainerValue(event, "hash")
-        self.filepath = self.GetEventContainerValue(event, "filepath")
         self.time_stamp = self.GetEventContainerValue(event, "time_stamp")
         self.time_dsec = self.GetEventContainerValue(event, "time_dsec")
         self.time_analysis_time = self.GetAnalysisTimestamp()
@@ -59,7 +58,12 @@ class PlasoGeneralLogParser():
 
     def GetEventContainerValue(self, event, tag):
         """ここに値が存在するか確認する"""
-        return event[self.CONTAINER_VALUE[tag]]
+
+        return event[self.GENERAL_CONTAINER_VALUE[tag]]
+
+    def GetSubEventContainerValue(self, event, tag):
+        pass
+
 
     def GetAnalysisTimestamp(self):
         """もうすこしかしこいタイムゾーン設定を"""
@@ -94,13 +98,17 @@ class ChromeHistoryPageVisitedEvent(PlasoGeneralLogParser):
 
     def __init__(self, event):
         super(ChromeHistoryPageVisitedEvent, self).__init__(event)
-        self.from_vistit = self.GetEventContainerValue(event, "from_visit")
-        self.transition = self.GetEventContainerValue(event, "transition")
-        self.title = self.GetEventContainerValue(event, "title")
-        self.typed_count = self.GetEventContainerValue(event, "typed_count")
-        self.url = self.GetEventContainerValue(event, "url")
-        self.url_hidden = self.GetEventContainerValue(event, "url_hidden")
-        self.visited_source = self.GetEventContainerValue(event, "visited_source")
+        self.from_vistit = self.GetSubEventContainerValue(event, "from_visit")
+        self.transition = self.GetSubEventContainerValue(event, "transition")
+        self.title = self.GetSubEventContainerValue(event, "title")
+        self.typed_count = self.GetSubEventContainerValue(event, "typed_count")
+        self.url = self.GetSubEventContainerValue(event, "url")
+        self.url_hidden = self.GetSubEventContainerValue(event, "url_hidden")
+        #self.visited_source = self.GetSubEventContainerValue(event, "visited_source")
+
+
+    def GetSubEventContainerValue(self, event, tag):
+        return event[self.CONTAINER_VALUE[tag]]
 
     def IsUserEvent(self, **target):
         if self.from_vistit != target["from_visit"]:
@@ -122,10 +130,13 @@ class ChromeHistoryFileDownloadedEvent(PlasoGeneralLogParser):
 
     def __init__(self, event):
         super(ChromeHistoryFileDownloadedEvent, self).__init__(event)
-        self.received_path = self.GetEventContainerValue(event, "received_path")
-        self.received_bytes = self.GetEventContainerValue(event, "received_bytes")
-        self.total_bytes = self.GetEventContainerValue(event, "total_bytes")
-        self.url = self.GetEventContainerValue(event, "url")
+        self.received_path = self.GetSubEventContainerValue(event, "received_path")
+        self.received_bytes = self.GetSubEventContainerValue(event, "received_bytes")
+        self.total_bytes = self.GetSubEventContainerValue(event, "total_bytes")
+        self.url = self.GetSubEventContainerValue(event, "url")
+
+    def GetSubEventContainerValue(self, event, tag):
+        return event[self.CONTAINER_VALUE[tag]]
 
     def IsUserEvent(self, **target):
         if self.received_path != target["received_path"]:
@@ -144,11 +155,13 @@ class BrowserParser:
 
     def GetBrowserEvent(self, event):
         event_type = self.data_type.split(":")
-        if self.CHROME_EVENT_ID["broser"] in event_type:
+        if self.CHROME_EVENT_ID["browser"] in event_type:
             if self.CHROME_EVENT_ID["parser"][0] in event_type:
                 return ChromeHistoryPageVisitedEvent(event)
             elif self.CHROME_EVENT_ID["parser"][1] in event_type:
                 return ChromeHistoryFileDownloadedEvent(event)
+        else:
+            pass
 
         return None
 
