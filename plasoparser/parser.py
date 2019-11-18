@@ -20,6 +20,23 @@ class PlasoLogParser:
                  "msiecf": ["leak", "redirected", "url"]}
     }
 
+    _SUPPORTED_EVTX_VALUE = {
+        "windows": {"evtx": ["record"]}
+    }
+
+    _SUPPORTED_NTFS_VALUE = {
+        "fs": {"stat": ["ntfs"],
+               "ntfs": ["usn_change"]}
+    }
+
+    _SUPPORTED_PREFETCH_VALUE = {
+        "windows": {"prefetch": ["execution"]}
+    }
+
+    _SUPPORTED_SRUM_VALUE = {
+        "windows": {"srum": ["application_usage", "network_connectivity", "network_usage"]}
+    }
+
     def __init__(self, event):
         """Plaso json_line log Parser Object
 
@@ -110,17 +127,11 @@ class PlasoLogParser:
                     elif index == 2:
                         """msie:webcache:leak_file"""
                         pass
-                    elif index ==3:
+                    elif index == 3:
                         """msie:webcache:partitions"""
                         pass
 
-
-
-
-
-
-
-
+                for  in 
 
 
         return None
