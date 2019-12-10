@@ -1,5 +1,4 @@
-from plasoparser.events import general
-
+from parsers.events import general
 
 
 class SRUMApplicationResourceUsageEvent(general.PlasoGeneralEvent):
@@ -59,61 +58,60 @@ class SRUMApplicationResourceUsageEvent(general.PlasoGeneralEvent):
 
 
 class SRUMNetworkConnectivityUsageEventData(general.PlasoGeneralEvent):
-  """SRUM network connectivity usage event data.
-  Note that the interpretation of some of these values is undocumented
-  as far as currently known.
-  Attributes:
-    application (str): application.
-    identifier (int): record identifier.
-    interface_luid (int): interface locally unique identifier (LUID).
-    l2_profile_flags (int): L2 profile flags.
-    l2_profile_identifier (int): L2 profile identifier.
-    user_identifier (str): user identifier, which is a Windows NT security
-        identifier.
-  """
+    """SRUM network connectivity usage event data.
+    Note that the interpretation of some of these values is undocumented
+    as far as currently known.
+    Attributes:
+      application (str): application.
+      identifier (int): record identifier.
+      interface_luid (int): interface locally unique identifier (LUID).
+      l2_profile_flags (int): L2 profile flags.
+      l2_profile_identifier (int): L2 profile identifier.
+      user_identifier (str): user identifier, which is a Windows NT security
+          identifier.
+    """
 
-  DATA_TYPE = 'windows:srum:network_connectivity'
+    DATA_TYPE = 'windows:srum:network_connectivity'
 
-  def __init__(self):
-    """Initializes event data."""
-    super(SRUMNetworkConnectivityUsageEventData, self).__init__(
-        data_type=self.DATA_TYPE)
-    self.application = None
-    self.identifier = None
-    self.interface_luid = None
-    self.l2_profile_flags = None
-    self.l2_profile_identifier = None
-    self.user_identifier = None
-
+    def __init__(self):
+        """Initializes event data."""
+        super(SRUMNetworkConnectivityUsageEventData, self).__init__(
+            data_type=self.DATA_TYPE)
+        self.application = None
+        self.identifier = None
+        self.interface_luid = None
+        self.l2_profile_flags = None
+        self.l2_profile_identifier = None
+        self.user_identifier = None
 
 
 class SRUMNetworkDataUsageEventData(general.PlasoGeneralEvent):
-  """SRUM network data usage event data.
-  Note that the interpretation of some of these values is undocumented
-  as far as currently known.
-  Attributes:
-    application (str): application.
-    bytes_received (int): number of bytes received.
-    bytes_sent (int): number of bytes sent.
-    identifier (int): record identifier.
-    interface_luid (int): interface locally unique identifier (LUID).
-    l2_profile_flags (int): L2 profile flags.
-    l2_profile_identifier (int): L2 profile identifier.
-    user_identifier (str): user identifier, which is a Windows NT security
-        identifier.
-  """
+    """SRUM network data usage event data.
+    Note that the interpretation of some of these values is undocumented
+    as far as currently known.
+    Attributes:
+      application (str): application.
+      bytes_received (int): number of bytes received.
+      bytes_sent (int): number of bytes sent.
+      identifier (int): record identifier.
+      interface_luid (int): interface locally unique identifier (LUID).
+      l2_profile_flags (int): L2 profile flags.
+      l2_profile_identifier (int): L2 profile identifier.
+      user_identifier (str): user identifier, which is a Windows NT security
+          identifier.
+    """
 
-  DATA_TYPE = 'windows:srum:network_usage'
+    DATA_TYPE = 'windows:srum:network_usage'
 
-  def __init__(self):
-    """Initializes event data."""
-    super(SRUMNetworkDataUsageEventData, self).__init__(
-        data_type=self.DATA_TYPE)
-    self.application = None
-    self.bytes_received = None
-    self.bytes_sent = None
-    self.identifier = None
-    self.interface_luid = None
-    self.l2_profile_flags = None
-    self.l2_profile_identifier = None
-    self.user_identifier = None
+    def __init__(self):
+        """Initializes event data."""
+        super(SRUMNetworkDataUsageEventData, self).__init__(
+            data_type=self.DATA_TYPE)
+        self.application = None
+        self.bytes_received = None
+        self.bytes_sent = None
+        self.identifier = None
+        self.interface_luid = None
+        self.l2_profile_flags = None
+        self.l2_profile_identifier = None
+        self.user_identifier = None

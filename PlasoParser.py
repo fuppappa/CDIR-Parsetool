@@ -69,7 +69,7 @@ def write_timeline(logs_path, export_path=None):
 def get_args():
     parser = ArgumentParser(description="Parse Program CDIR logs after Plaso conversion")
 
-    parser.add_argument("CDIR_Logs", type=str, help="Path to a CDIR logs after Plaso conversion")
+    parser.add_argument("Windows10 Log", type=str, help="Path to Log collected using CDIR after Plaso conversion ")
     parser.add_argument("-o", "--out", type=str, help="Path to export file")
     parser.add_argument("-i", "--interactive", action="store_true", help="switch interactive mode")
     parser.add_argument("-p", type=str, help="grep target program name")

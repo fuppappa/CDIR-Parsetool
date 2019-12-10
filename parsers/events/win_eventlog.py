@@ -1,4 +1,5 @@
-from plasoparser.events import general
+from parsers.events import general
+
 class WinEvtxRecordEventData(general.PlasoGeneralEvent):
   """Windows XML EventLog (EVTX) record event data.
   Attributes:

@@ -1,5 +1,5 @@
 from datetime import datetime, timezone, timedelta
-from plasoparser import parser
+from parsers import parser
 
 class PlasoGeneralEvent():
     """plaso general parser"""

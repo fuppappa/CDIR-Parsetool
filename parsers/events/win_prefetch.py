@@ -1,4 +1,4 @@
-from plasoparser.events import general
+from parsers.events import general
 
 class WinPrefetchExecutionEventData(general.PlasoGeneralEvent):
   """Windows Prefetch event data.
