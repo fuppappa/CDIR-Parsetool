@@ -1,1 +1,0 @@
-from parsers.events import general

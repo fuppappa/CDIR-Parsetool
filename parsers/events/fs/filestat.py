@@ -1,4 +1,6 @@
-class FileStatEventData(events.EventData):
+from parsers.events import general
+
+class FileStatEventData(general.PlasoGeneralEvent):
   """File system stat event data.
   Attributes:
     file_entry_type (int): dfVFS file entry type.
@@ -18,3 +20,10 @@ class FileStatEventData(events.EventData):
     self.file_system_type = None
     self.inode = None
     self.is_allocated = None
+
+  def SetEventAttribute(self, event):
+    self.file_entry_type = event['file_entry_type']
+    self.file_size = event['file_size']
+    self.file_system_type = event['file_system_type']
+    self.inode = event['inode']
+    self.is_allocated = event['is_allocated']

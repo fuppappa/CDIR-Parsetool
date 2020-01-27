@@ -1,6 +1,6 @@
 from parsers.events import general
 
-class SafariHistoryPageVisitedEventData(events.EventData):
+class SafariHistoryPageVisitedEventData(general.PlasoGeneralEvent):
     """Safari history event data.
     Attributes:
       host (str): hostname of the server.
@@ -25,7 +25,7 @@ class SafariHistoryPageVisitedEventData(events.EventData):
         self.was_http_non_get = None
 
 
-class SafariBinaryCookieEventData(events.EventData):
+class SafariBinaryCookieEventData(general.PlasoGeneralEvent):
     """Safari binary cookie event data.
     Attributes:
       cookie_name (str): cookie name.

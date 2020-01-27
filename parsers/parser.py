@@ -1,8 +1,8 @@
 import time, sys
 from datetime import datetime, timezone, timedelta
-from parsers import manager
+from parsers.manager import EventManagerInterface
 
-JST = timezone(timedelta(hours=+9), "JST")
+PARSE_TIMEZONE = timezone(timedelta(hours=+9), 'JST')
 
 """
 @Parser Object
@@ -25,11 +25,10 @@ class PlasoLogParser:
         """
 
         self.event = event
-        self.data_type = self.event["data_type"]
         self.timestamp = self.event["timestamp"]
-        self.PlasoEvent = None
+        self.PlasoEventObject = None
 
-    def AnalyseTimeRange(self, time_range):
+    def ExtractTimeRange(self, time_range):
         """Determine if timestamp is within specified range
 
         Args:
@@ -48,14 +47,8 @@ class PlasoLogParser:
 
         return False
 
-    def SetPlasoParserObject(self):
-        event_manager = manager.EventManagerInterface()
+    def EventAnalysis(self, **AnalysisOption):
+        self.PlasoEventObject = EventManagerInterface.GetEventObject(self.event["data_type"])
 
-        self.PlasoEvent = event_manager.DataType2Category(self.data_type)
+        self.PlasoEventObject.SetAttribute(self.event)
 
-
-class PlasoLogStreamParser:
-    def __init__(self, path):
-        self.log_path = path
-        self.event = None
-        self.total_event = None

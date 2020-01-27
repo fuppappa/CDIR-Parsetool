@@ -1,44 +1,27 @@
 from parsers.events import general
 
 
-
-
-
 class ChromeHistoryPageVisitedEvent(general.PlasoGeneralEvent):
-    CONTAINER_VALUE = {"from_visit": "from_visit", "transition": "page_transition_type", "title": "title",
-                       "typed_count": "typed_count", "url": "url", "url_hidden": "url_hidden",
-                       "visited_source": "visit_source"
-                       }
     TRANSITION_TYPE = ("link", "typed", "auto_bookmark", "auto_subframe", "manual_subframe", "generated",
                        "auto_toplevel", "form_submit", "reload", "keyword", "keyword_generated"
                        )
 
     DATA_TYPE = "chrome:history:page_visited"
 
-    def __init__(self, event):
-        super(ChromeHistoryPageVisitedEvent, self).__init__(event)
-        self.from_vistit = self.GetSubEventContainerValue(event, "from_visit")
-        self.transition = self.GetSubEventContainerValue(event, "transition")
-        self.title = self.GetSubEventContainerValue(event, "title")
-        self.typed_count = self.GetSubEventContainerValue(event, "typed_count")
-        self.url = self.GetSubEventContainerValue(event, "url")
-        self.url_hidden = self.GetSubEventContainerValue(event, "url_hidden")
-        # self.visited_source = self.GetSubEventContainerValue(event, "visited_source")
+    def __init__(self):
+        super(ChromeHistoryPageVisitedEvent, self).__init__(data_type=self.DATA_TYPE)
+        self.from_visit = None
+        self.transition_type = None
+        self.title = None
+        self.url = None
+        self.url_hidden = None
 
-    def GetSubEventContainerValue(self, event, tag):
-        return event[self.CONTAINER_VALUE[tag]]
-
-    def IsUserEvent(self, **target):
-        if self.from_vistit != target["from_visit"]:
-            return False
-        if self.url == target["url"]:
-            if self.title != target["title"]:
-                return False
-
-        return True
-
-    def TransitionType(self):
-        return self.TRANSITION_TYPE[self.transition]
+    def SetEventAttribute(self, event):
+        self.from_visit = event["from_visit"]
+        self.transition_type = event["page_transition_type"]
+        self.title = event["title"]
+        self.url = event["url"]
+        self.url_hidden = event["url_hidden"]
 
 
 class ChromeHistoryFileDownloadedEvent(general.PlasoGeneralEvent):
@@ -46,19 +29,17 @@ class ChromeHistoryFileDownloadedEvent(general.PlasoGeneralEvent):
                        "url": "url"
                        }
 
-    DATA_TYPE = "chrome:history:downloaded"
+    DATA_TYPE = "chrome:history:file_downloaded"
 
-    def __init__(self, event):
-        super(ChromeHistoryFileDownloadedEvent, self).__init__(event)
-        self.received_path = self.GetSubEventContainerValue(event, "received_path")
-        self.received_bytes = self.GetSubEventContainerValue(event, "received_bytes")
-        self.total_bytes = self.GetSubEventContainerValue(event, "total_bytes")
-        self.url = self.GetSubEventContainerValue(event, "url")
+    def __init__(self):
+        super(ChromeHistoryFileDownloadedEvent, self).__init__(data_type=self.DATA_TYPE)
+        self.received_path = None
+        self.received_bytes = None
+        self.total_bytes = None
+        self.url = None
 
-    def GetSubEventContainerValue(self, event, tag):
-        return event[self.CONTAINER_VALUE[tag]]
-
-    def IsUserEvent(self, **target):
-        if self.received_path != target["received_path"]:
-            return False
-        return True
+    def SetEventAttribute(self, event):
+        self.received_path = event["received_path"]
+        self.received_bytes = event["received_bytes"]
+        self.total_bytes = event["total_bytes"]
+        self.url = event["url"]

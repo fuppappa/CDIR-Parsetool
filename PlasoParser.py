@@ -7,7 +7,7 @@ import sys
 
 __author__ = "yfujieda"
 __version__ = "0.1"
-__date__ = "2019_10_24"
+__date__ = "2020_01_15"
 
 
 def AnalyseTimeRange(timestamp, time_range):
@@ -36,6 +36,21 @@ def divide_timerange(export_path, logs_path, timerange):
         print("finished!! export >> " + export_path)
 
 
+def exclude_blacklist(log, logs_path, *blacklist):
+    if log:
+        if log["data_type"] in blacklist:
+            return None
+        return log
+    elif logs_path:
+        white_log = []
+        for log in json_interface.JsonloadLiner(logs_path):
+            if log["data_type"] in blacklist:
+                continue
+            white_log.append(log)
+
+        return white_log
+    else:
+        return None
 
 
 def write_timeline(logs_path, export_path=None):

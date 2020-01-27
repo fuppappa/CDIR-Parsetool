@@ -1,6 +1,7 @@
 from parsers.events import general
 
-class FirefoxPlacesBookmarkAnnotationEventData(events.EventData):
+
+class FirefoxPlacesBookmarkAnnotationEventData(general.PlasoGeneralEvent):
     """Firefox bookmark annotation event data.
     Attributes:
       content (str): annotation content.
@@ -19,7 +20,7 @@ class FirefoxPlacesBookmarkAnnotationEventData(events.EventData):
         self.url = None
 
 
-class FirefoxPlacesBookmarkFolderEventData(events.EventData):
+class FirefoxPlacesBookmarkFolderEventData(general.PlasoGeneralEvent):
     """Firefox bookmark folder event data.
     Attributes:
       title (str): title of the bookmark folder.
@@ -34,7 +35,7 @@ class FirefoxPlacesBookmarkFolderEventData(events.EventData):
         self.title = None
 
 
-class FirefoxPlacesBookmarkEventData(events.EventData):
+class FirefoxPlacesBookmarkEventData(general.PlasoGeneralEvent):
     """Firefox bookmark event data.
     Attributes:
       host (str): visited hostname.
@@ -60,7 +61,7 @@ class FirefoxPlacesBookmarkEventData(events.EventData):
 
 
 # TODO: refactor extra attribute.
-class FirefoxPlacesPageVisitedEventData(events.EventData):
+class FirefoxPlacesPageVisitedEventData(general.PlasoGeneralEvent):
     """Firefox page visited event data.
     Attributes:
       extra (list[object]): extra event data.
@@ -85,7 +86,7 @@ class FirefoxPlacesPageVisitedEventData(events.EventData):
         self.visit_type = None
 
 
-class FirefoxDownloadEventData(events.EventData):
+class FirefoxDownloadEventData(general.PlasoGeneralEvent):
     """Firefox download event data.
     Attributes:
       full_path (str): full path of the target of the download.
@@ -120,7 +121,7 @@ Cookie
 """
 
 
-class FirefoxCookieEventData(events.EventData):
+class FirefoxCookieEventData(general.PlasoGeneralEvent):
     """Firefox Cookie event data.
     Attributes:
       cookie_name (str): name field of the cookie.
