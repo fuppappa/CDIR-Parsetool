@@ -35,3 +35,17 @@ class WindowsRegistryServiceEventData(general.PlasoGeneralEvent):
         self.service_type = None
         self.start_type = None
         self.values = None
+
+    def SetEventAttribute(self, event):
+        self.error_control = event['error_control']
+        if 'image_path' in event.keys():
+            self.image_path = event['image_path']
+        self.key_path = event['key_path']
+        self.name = event['name']
+        if 'service_dll' in event.keys():
+            self.service_dll = event['service_dll']
+        if 'object_name' in event.keys():
+            self.object_name = event['object_name']
+        self.service_type = event['service_type']
+        self.start_type = event['start_type']
+        self.values = event['values']

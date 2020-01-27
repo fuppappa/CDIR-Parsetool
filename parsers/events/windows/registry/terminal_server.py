@@ -23,6 +23,11 @@ class TerminalServerClientConnectionEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.username = None
 
+    def SetEventAttribute(self, event):
+        self.entries = event['entries']
+        self.key_path = event['key_path']
+        self.username = event['username']
+
 
 class TerminalServerClientMRUEventData(general.PlasoGeneralEvent):
     """Terminal Server client MRU event data attribute container.
@@ -40,3 +45,7 @@ class TerminalServerClientMRUEventData(general.PlasoGeneralEvent):
             data_type=self.DATA_TYPE)
         self.entries = None
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        self.entries = event['entries']
+        self.key_path = event['key_path']

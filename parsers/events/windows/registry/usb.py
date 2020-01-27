@@ -26,3 +26,13 @@ class WindowsUSBDeviceEventData(general.PlasoGeneralEvent):
         # TODO: rename subkey_name to something that closer matches its purpose.
         self.subkey_name = None
         self.vendor = None
+
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+        if 'product' in event.keys():
+            self.product = event['product']
+        self.serial = event['serial']
+        # TODO: rename subkey_name to something that closer matches its purpose.
+        self.subkey_name = event['subkey_name']
+        if 'vendor' in event.keys():
+            self.vendor = event['vendor']

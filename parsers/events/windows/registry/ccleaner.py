@@ -21,6 +21,10 @@ class CCleanerConfigurationEventData(general.PlasoGeneralEvent):
         self.configuration = None
         self.key_path = None
 
+    def SetEventAttribute(self, event):
+        self.configuration = event['configuration']
+        self.key_path = event['key_path']
+
 
 class CCleanerUpdateEventData(general.PlasoGeneralEvent):
     """CCleaner update event data.
@@ -35,3 +39,6 @@ class CCleanerUpdateEventData(general.PlasoGeneralEvent):
         """Initializes event data."""
         super(CCleanerUpdateEventData, self).__init__(data_type=self.DATA_TYPE)
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']

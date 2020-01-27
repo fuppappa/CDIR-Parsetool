@@ -38,11 +38,13 @@ class WinEvtxRecordEventData(general.PlasoGeneralEvent):
         self.computer_name = event['computer_name']
         self.event_identifier = event['event_identifier']
         self.event_level = event['event_level']
-        self.message_identifier = event['message_identifier']
+        if 'message_identifier' in event.keys():
+            self.message_identifier = event['message_identifier']
         self.record_number = event['record_number']
         self.recovered = event['recovered']
         self.source_name = event['source_name']
         self.strings = event['strings']
         self.strings_parsed = event['strings_parsed']
-        self.user_sid = event['user_sid']
+        if 'user_sid' in event.keys():
+            self.user_sid = event['user_sid']
         self.xml_string = event['xml_string']

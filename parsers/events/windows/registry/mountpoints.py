@@ -28,3 +28,14 @@ class MountPoints2EventData(general.PlasoGeneralEvent):
         self.server_name = None
         self.share_name = None
         self.type = None
+
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+        if 'label' in event.keys():
+            self.label = event['label']
+        self.name = event['name']
+        self.server_name = event['server_name']
+        if 'share_name' in event.keys():
+            self.share_name = event['share_name']
+        if 'type' in event.keys():
+            self.type = event['type']

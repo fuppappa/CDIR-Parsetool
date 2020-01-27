@@ -20,6 +20,10 @@ class OfficeMRUWindowsRegistryEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.value_string = None
 
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+        self.value_string = event['value_string']
+
 
 class OfficeMRUListWindowsRegistryEventData(general.PlasoGeneralEvent):
     """Microsoft Office MRU list Windows Registry event data.
@@ -36,3 +40,7 @@ class OfficeMRUListWindowsRegistryEventData(general.PlasoGeneralEvent):
             data_type=self.DATA_TYPE)
         self.entries = None
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        self.entries = event['entries']
+        self.key_path = event['key_path']

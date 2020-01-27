@@ -25,3 +25,11 @@ class WinlogonEventData(general.PlasoGeneralEvent):
         self.handler = None
         self.key_path = None
         self.trigger = None
+
+    def SetEventAttribute(self, event):
+        self.application = event['application']
+        self.command = event['command']
+        if 'handler' in event.keys():
+            self.handler = event['handler']
+        self.key_path = event['key_path']
+        self.trigger = event['trigger']

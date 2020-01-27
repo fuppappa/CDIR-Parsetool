@@ -19,3 +19,8 @@ class TypedURLsEventData(general.PlasoGeneralEvent):
         super(TypedURLsEventData, self).__init__(data_type=self.DATA_TYPE)
         self.entries = None
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        if 'entries' in event.keys():
+            self.entries = event['entries']
+        self.key_path = event['key_path']

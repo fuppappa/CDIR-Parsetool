@@ -21,3 +21,7 @@ class BackgroundActivityModeratorEventData(general.PlasoGeneralEvent):
             self).__init__(data_type=self.DATA_TYPE)
         self.binary_path = None
         self.user_sid = None
+
+    def SetEventAttribute(self, event):
+        self.binary_path = event["binary_path"]
+        self.user_sid = event["user_sid"]

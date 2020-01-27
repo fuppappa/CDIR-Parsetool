@@ -19,3 +19,7 @@ class OutlookSearchMRUEventData(general.PlasoGeneralEvent):
         super(OutlookSearchMRUEventData, self).__init__(data_type=self.DATA_TYPE)
         self.entries = None
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        self.entries = event['entries']
+        self.key_path = event['key_path']

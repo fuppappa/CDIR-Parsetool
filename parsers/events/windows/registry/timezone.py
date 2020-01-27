@@ -20,3 +20,7 @@ class WindowsTimezoneSettingsEventData(general.PlasoGeneralEvent):
             data_type=self.DATA_TYPE)
         self.configuration = None
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        self.configuration = event['configuration']
+        self.key_path = event['key_path']

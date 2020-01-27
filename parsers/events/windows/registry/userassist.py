@@ -29,7 +29,7 @@ class UserAssistWindowsRegistryEventData(general.PlasoGeneralEvent):
         self.number_of_executions = None
         self.value_name = None
 
-    def SetAttribute(self, event):
+    def SetEventAttribute(self, event):
         self.application_focus_count = event["application_focus_count"]
         self.application_focus_duration = event["application_focus_duration"]
         self.entry_index = event["entry_index"]

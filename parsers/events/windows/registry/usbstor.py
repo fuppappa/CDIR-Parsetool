@@ -34,3 +34,15 @@ class USBStorEventData(general.PlasoGeneralEvent):
         # TODO: rename subkey_name to something that closer matches its purpose.
         self.subkey_name = None
         self.vendor = None
+
+    def SetEventAttribute(self, event):
+        self.device_type = event['device_type']
+        self.display_name = event['display_name']
+        self.key_path = event['key_path']
+        self.parent_id_prefix = event['parent_id_prefix']
+        self.product = event['product']
+        self.revision = event['revision']
+        self.serial = event['serial']
+        # TODO: rename subkey_name to something that closer matches its purpose.
+        self.subkey_name = event['subkey_name']
+        self.vendor = event['vendor']

@@ -20,3 +20,7 @@ class ShutdownWindowsRegistryEventData(general.PlasoGeneralEvent):
             data_type=self.DATA_TYPE)
         self.key_path = None
         self.value_name = None
+
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+        self.value_name = event['value_name']

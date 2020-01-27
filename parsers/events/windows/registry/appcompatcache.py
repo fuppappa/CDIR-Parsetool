@@ -21,6 +21,11 @@ class AppCompatCacheEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.path = None
 
+    def SetEventAttribute(self, event):
+        self.entry_index = event['entry_index']
+        self.key_path = event['key_path']
+        self.path = event['path']
+
 
 class AppCompatCacheHeader(object):
     """Application Compatibility Cache header."""

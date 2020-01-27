@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 """This file contains a WinRAR history Windows Registry plugin."""
 
-from __future__ import unicode_literals
-
-import re
-
-from plaso.containers import events
-from plaso.containers import time_events
-from plaso.lib import definitions
-from plaso.parsers import winreg
-from plaso.parsers.winreg_plugins import interface
+from parsers.events import general
 
 
 class WinRARHistoryEventData(general.PlasoGeneralEvent):
@@ -27,3 +19,7 @@ class WinRARHistoryEventData(general.PlasoGeneralEvent):
         super(WinRARHistoryEventData, self).__init__(data_type=self.DATA_TYPE)
         self.entries = None
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        self.entries = event['entries']
+        self.key_path = event['key_path']

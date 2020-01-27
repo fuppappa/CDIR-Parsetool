@@ -28,3 +28,12 @@ class WindowsRegistryInstallationEventData(general.PlasoGeneralEvent):
         self.product_name = None
         self.service_pack = None
         self.version = None
+
+    def SetEventAttribute(self, event):
+        self.build_number = event['build_number']
+        self.key_path = event['key_path']
+        self.owner = event['owner']
+        self.product_name = event['product_name']
+        if 'service_pack' in event.keys():
+            self.service_pack = event['service_pack']
+        self.version = event['version']

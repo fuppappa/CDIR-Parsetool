@@ -27,3 +27,11 @@ class SAMUsersWindowsRegistryEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.login_count = None
         self.username = None
+
+    def SetEventAttribute(self, event):
+        self.account_rid = event['account_rid']
+        self.comments = event['comments']
+        self.fullname = event['fullname']
+        self.key_path = event['key_path']
+        self.login_count = event['login_count']
+        self.username = event['username']

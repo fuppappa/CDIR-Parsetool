@@ -19,3 +19,7 @@ class MSIEZoneSettingsEventData(general.PlasoGeneralEvent):
         super(MSIEZoneSettingsEventData, self).__init__(data_type=self.DATA_TYPE)
         self.key_path = None
         self.settings = None
+
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+        self.settings = event['settings']

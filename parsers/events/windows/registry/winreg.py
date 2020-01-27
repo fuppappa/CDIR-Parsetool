@@ -53,6 +53,12 @@ class WindowsRegistryEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.values = None
 
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+
+        if 'values' in event.keys():
+            self.values = event['values']
+
 
 class WindowsVolumeEventData(general.PlasoGeneralEvent):
     """Windows volume event data attribute container.
@@ -71,3 +77,9 @@ class WindowsVolumeEventData(general.PlasoGeneralEvent):
         # TODO: replace origin with something machine readable.
         self.origin = None
         self.serial_number = None
+
+    def SetEventAttribute(self, event):
+        self.device_path = event['device_path']
+        # TODO: replace origin with something machine readable.
+        self.origin = event['origin']
+        self.serial_number = event['serial_number']

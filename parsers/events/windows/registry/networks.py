@@ -26,3 +26,10 @@ class WindowsRegistryNetworkListEventData(general.PlasoGeneralEvent):
         self.description = None
         self.dns_suffix = None
         self.ssid = None
+
+    def SetEventAttribute(self, event):
+        self.connection_type = event['connection_type']
+        self.default_gateway_mac = event['default_gateway_mac']
+        self.description = event['description']
+        self.dns_suffix = event['dns_suffix']
+        self.ssid = event['ssid']

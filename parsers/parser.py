@@ -11,7 +11,7 @@ Instance of This class is analyser object each data type
 """
 
 
-class PlasoLogParser:
+class PlasoLogParser(object):
 
     def __init__(self, event):
         """Plaso json_line log Parser Object
@@ -50,5 +50,5 @@ class PlasoLogParser:
     def EventAnalysis(self, **AnalysisOption):
         self.PlasoEventObject = EventManagerInterface.GetEventObject(self.event["data_type"])
 
-        self.PlasoEventObject.SetAttribute(self.event)
+        self.PlasoEventObject.SetEventAttribute(self.event)
 

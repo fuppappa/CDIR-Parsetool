@@ -21,3 +21,8 @@ class TaskCacheEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.task_name = None
         self.task_identifier = None
+
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+        self.task_name = event['task_name']
+        self.task_identifier = event['task_identifier']

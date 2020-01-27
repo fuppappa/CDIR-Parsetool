@@ -24,3 +24,9 @@ class ExplorerProgramsCacheEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.known_folder_identifier = None
         self.value_name = None
+
+    def SetEventAttribute(self, event):
+        self.entries = event['entries']
+        self.key_path = event['key_path']
+        self.known_folder_identifier = event['known_folder_identifier']
+        self.value_name = event['value_name']

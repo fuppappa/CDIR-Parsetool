@@ -1,7 +1,7 @@
 import sys
 from parsers.events.browser import chrome, firefox, msie, opera, safari
 from parsers.events.fs import filestat, ntfs
-from parsers.events.windows import win_eventlog, win_prefetch, win_srum
+from parsers.events.windows import win_eventlog, win_prefetch, srum
 from parsers.events.windows.registry import appcompatcache, bagmru, bam, ccleaner, lfu, mountpoints, mrulist, mrulistex, \
     msie_zones, network_drives, networks, officemru, outlook, programscache, run, sam_users, services, shutdown, \
     task_scheduler, terminal_server, timezone, \
@@ -80,7 +80,7 @@ class FileSystemEventManager(object):
     OBJ_TYPE = 'file_system'
 
     SUPPORTED_EVENT_DATA_TYPES = {
-        'fs:stat': ('NTFSFileStatEventData', filestat),
+        'fs:stat': ('FileStatEventData', filestat),
         'fs:stat:ntfs': ('NTFSFileStatEventData', ntfs),
         'fs:ntfs:usn_change': ('NTFSUSNChangeEventData', ntfs)}
 
@@ -141,13 +141,24 @@ class WinRegistryEventManager(object):
     }
 
 
+class SrumEventManager(object):
+    OBJ_TYPE = 'srum'
+
+    SUPPORTED_EVENT_DATA_TYPES = {
+        'windows:srum:application_usage': ('SRUMApplicationResourceUsageEventData', srum),
+        'windows:srum:network_connectivity': ('SRUMNetworkConnectivityUsageEventData', srum),
+        'windows:srum:network_usage': ('SRUMNetworkDataUsageEventData', srum)
+    }
+
+
 class EventManagerInterface(object):
     _SUPPORT_EVENT_CATEGORY = (
         BrowserEventManager,
         FileSystemEventManager,
         WinPrefetchEventManager,
         WinEvtxEventManager,
-        WinRegistryEventManager
+        WinRegistryEventManager,
+        SrumEventManager
     )
 
     def __init__(self):

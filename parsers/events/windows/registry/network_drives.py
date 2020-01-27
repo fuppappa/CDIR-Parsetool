@@ -23,3 +23,9 @@ class NetworkDriveEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.server_name = None
         self.share_name = None
+
+    def SetEventAttribute(self, event):
+        self.drive_letter = event['drive_letter']
+        self.key_path = event['key_path']
+        self.server_name = event['server_name']
+        self.share_name = event['share_name']
