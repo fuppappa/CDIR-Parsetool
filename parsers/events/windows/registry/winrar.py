@@ -23,3 +23,11 @@ class WinRARHistoryEventData(general.PlasoGeneralEvent):
     def SetEventAttribute(self, event):
         self.entries = event['entries']
         self.key_path = event['key_path']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

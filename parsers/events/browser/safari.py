@@ -1,5 +1,6 @@
 from parsers.events import general
 
+
 class SafariHistoryPageVisitedEventData(general.PlasoGeneralEvent):
     """Safari history event data.
     Attributes:

@@ -37,6 +37,14 @@ class NTFSFileStatEventData(general.PlasoGeneralEvent):
         self.name = event['name']
         self.parent_file_reference = event['parent_file_reference']
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
+
 
 class NTFSUSNChangeEventData(general.PlasoGeneralEvent):
     """NTFS USN change event data.
@@ -72,3 +80,11 @@ class NTFSUSNChangeEventData(general.PlasoGeneralEvent):
         self.update_reason_flags = event['update_reason_flags']
         self.update_sequence_number = event['update_sequence_number']
         self.update_source_flags = event['update_source_flags']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

@@ -46,3 +46,11 @@ class USBStorEventData(general.PlasoGeneralEvent):
         # TODO: rename subkey_name to something that closer matches its purpose.
         self.subkey_name = event['subkey_name']
         self.vendor = event['vendor']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

@@ -83,3 +83,11 @@ class WindowsVolumeEventData(general.PlasoGeneralEvent):
         # TODO: replace origin with something machine readable.
         self.origin = event['origin']
         self.serial_number = event['serial_number']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

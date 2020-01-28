@@ -83,6 +83,14 @@ class SRUMApplicationResourceUsageEventData(general.PlasoGeneralEvent):
         self.identifier = event['identifier']
         self.user_identifier = event['user_identifier']
 
+    def __eq__(self, other):
+        if not isinstance(other, SRUMApplicationResourceUsageEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
+
 
 class SRUMNetworkConnectivityUsageEventData(general.PlasoGeneralEvent):
     """SRUM network connectivity usage event data.
@@ -118,6 +126,14 @@ class SRUMNetworkConnectivityUsageEventData(general.PlasoGeneralEvent):
         self.l2_profile_flags = event['l2_profile_flags']
         self.l2_profile_identifier = event['l2_profile_identifier']
         self.user_identifier = event['user_identifier']
+
+    def __eq__(self, other):
+        if not isinstance(other, SRUMNetworkConnectivityUsageEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
 
 
 class SRUMNetworkDataUsageEventData(general.PlasoGeneralEvent):
@@ -161,3 +177,11 @@ class SRUMNetworkDataUsageEventData(general.PlasoGeneralEvent):
         self.l2_profile_flags = event['l2_profile_flags']
         self.l2_profile_identifier = event['l2_profile_identifier']
         self.user_identifier = event['user_identifier']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

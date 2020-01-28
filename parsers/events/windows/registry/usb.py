@@ -36,3 +36,11 @@ class WindowsUSBDeviceEventData(general.PlasoGeneralEvent):
         self.subkey_name = event['subkey_name']
         if 'vendor' in event.keys():
             self.vendor = event['vendor']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

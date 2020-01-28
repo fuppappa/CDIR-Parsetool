@@ -20,6 +20,19 @@ class OperaTypedHistoryEventData(general.PlasoGeneralEvent):
         self.entry_type = None
         self.url = None
 
+    def SetEventAttribute(self, event):
+        self.entry_selection = event['entry_selection']
+        self.entry_type = event['entry_type']
+        self.url = event['url']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
+
 
 class OperaGlobalHistoryEventData(general.PlasoGeneralEvent):
     """Opera global history entry data.
@@ -39,3 +52,17 @@ class OperaGlobalHistoryEventData(general.PlasoGeneralEvent):
         self.popularity_index = None
         self.title = None
         self.url = None
+
+    def SetEventAttribute(self, event):
+        self.description = event['description']
+        self.popularity_index = event['popularity_index']
+        self.title = event['title']
+        self.url = event['url']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

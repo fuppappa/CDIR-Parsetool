@@ -41,3 +41,11 @@ class WinPrefetchExecutionEventData(general.PlasoGeneralEvent):
         self.version = event["version"]
         self.volume_device_paths = event["volume_device_paths"]
         self.volume_serial_numbers = event["volume_serial_numbers"]
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

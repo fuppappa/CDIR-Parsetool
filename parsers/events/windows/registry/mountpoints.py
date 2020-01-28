@@ -39,3 +39,11 @@ class MountPoints2EventData(general.PlasoGeneralEvent):
             self.share_name = event['share_name']
         if 'type' in event.keys():
             self.type = event['type']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

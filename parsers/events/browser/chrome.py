@@ -23,6 +23,14 @@ class ChromeHistoryPageVisitedEvent(general.PlasoGeneralEvent):
         self.url = event["url"]
         self.url_hidden = event["url_hidden"]
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
+
 
 class ChromeHistoryFileDownloadedEvent(general.PlasoGeneralEvent):
     CONTAINER_VALUE = {"received_path": "full_path", "received_bytes": "received_bytes", "total_bytes": "total_bytes",
@@ -43,3 +51,11 @@ class ChromeHistoryFileDownloadedEvent(general.PlasoGeneralEvent):
         self.received_bytes = event["received_bytes"]
         self.total_bytes = event["total_bytes"]
         self.url = event["url"]
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

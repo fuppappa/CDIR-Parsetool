@@ -25,3 +25,11 @@ class BackgroundActivityModeratorEventData(general.PlasoGeneralEvent):
     def SetEventAttribute(self, event):
         self.binary_path = event["binary_path"]
         self.user_sid = event["user_sid"]
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

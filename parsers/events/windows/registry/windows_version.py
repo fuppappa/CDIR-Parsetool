@@ -37,3 +37,11 @@ class WindowsRegistryInstallationEventData(general.PlasoGeneralEvent):
         if 'service_pack' in event.keys():
             self.service_pack = event['service_pack']
         self.version = event['version']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

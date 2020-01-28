@@ -22,6 +22,18 @@ class WindowsBootExecuteEventData(general.PlasoGeneralEvent):
         self.key_path = None
         self.value = None
 
+    def SetEventAttribute(self, event):
+        self.key_path = event['key_path']
+        self.value = event['value']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
+
 
 class WindowsBootVerificationEventData(general.PlasoGeneralEvent):
     """Windows Boot Verification event data attribute container.
@@ -40,3 +52,15 @@ class WindowsBootVerificationEventData(general.PlasoGeneralEvent):
             data_type=self.DATA_TYPE)
         self.image_path = None
         self.key_path = None
+
+    def SetEventAttribute(self, event):
+        self.image_path = event['image_path']
+        self.key_path = event['key_path']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

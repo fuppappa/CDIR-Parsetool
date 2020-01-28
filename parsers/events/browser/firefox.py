@@ -19,6 +19,19 @@ class FirefoxPlacesBookmarkAnnotationEventData(general.PlasoGeneralEvent):
         self.title = None
         self.url = None
 
+    def SetEventAttribute(self, event):
+        self.content = event['content']
+        self.title = event['title']
+        self.url = event['url']
+
+    def __eq__(self, other):
+        if not isinstance(other, FirefoxPlacesBookmarkAnnotationEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
+
 
 class FirefoxPlacesBookmarkFolderEventData(general.PlasoGeneralEvent):
     """Firefox bookmark folder event data.
@@ -33,6 +46,17 @@ class FirefoxPlacesBookmarkFolderEventData(general.PlasoGeneralEvent):
         super(FirefoxPlacesBookmarkFolderEventData, self).__init__(
             data_type=self.DATA_TYPE)
         self.title = None
+
+    def SetEventAttribute(self, event):
+        self.title = event['title']
+
+    def __eq__(self, other):
+        if not isinstance(other, FirefoxPlacesBookmarkFolderEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
 
 
 class FirefoxPlacesBookmarkEventData(general.PlasoGeneralEvent):
@@ -59,6 +83,22 @@ class FirefoxPlacesBookmarkEventData(general.PlasoGeneralEvent):
         self.url = None
         self.visit_count = None
 
+    def SetEventAttribute(self, event):
+        self.host = event['host']
+        self.places_title = event['places_title']
+        self.title = event['title']
+        self.type = event['type']
+        self.url = event['url']
+        self.visit_count = event['visit_count']
+
+    def __eq__(self, other):
+        if not isinstance(other, FirefoxPlacesBookmarkEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
+
 
 # TODO: refactor extra attribute.
 class FirefoxPlacesPageVisitedEventData(general.PlasoGeneralEvent):
@@ -84,6 +124,22 @@ class FirefoxPlacesPageVisitedEventData(general.PlasoGeneralEvent):
         self.url = None
         self.visit_count = None
         self.visit_type = None
+
+    def SetEventAttribute(self, event):
+        self.extra = event['extra']
+        self.host = event['host']
+        self.title = event['title']
+        self.url = event['url']
+        self.visit_count = event['visit_count']
+        self.visit_type = event['visit_type']
+
+    def __eq__(self, other):
+        if not isinstance(other, FirefoxPlacesPageVisitedEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
 
 
 class FirefoxDownloadEventData(general.PlasoGeneralEvent):
@@ -114,6 +170,25 @@ class FirefoxDownloadEventData(general.PlasoGeneralEvent):
         self.temporary_location = None
         self.total_bytes = None
         self.url = None
+
+    def SetEventAttribute(self, event):
+        self.full_path = event['full_path']
+        self.mime_type = event['mime_type']
+        self.name = event['name']
+        self.offset = event['offset']
+        self.received_bytes = event['received_bytes']
+        self.referrer = event['referrer']
+        self.temporary_location = event['temporary_location']
+        self.total_bytes = event['total_bytes']
+        self.url = event['url']
+
+    def __eq__(self, other):
+        if not isinstance(other, FirefoxDownloadEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
 
 
 """
@@ -146,3 +221,20 @@ class FirefoxCookieEventData(general.PlasoGeneralEvent):
         self.path = None
         self.secure = None
         self.url = None
+
+    def SetEventAttribute(self, event):
+        self.cookie_name = event['cookie_name']
+        self.data = event['data']
+        self.host = event['host']
+        self.httponly = event['httponly']
+        self.path = event['path']
+        self.secure = event['secure']
+        self.url = event['url']
+
+    def __eq__(self, other):
+        if not isinstance(other, FirefoxCookieEventData):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

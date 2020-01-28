@@ -49,3 +49,11 @@ class WindowsRegistryServiceEventData(general.PlasoGeneralEvent):
         self.service_type = event['service_type']
         self.start_type = event['start_type']
         self.values = event['values']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)

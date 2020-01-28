@@ -33,3 +33,11 @@ class WinlogonEventData(general.PlasoGeneralEvent):
             self.handler = event['handler']
         self.key_path = event['key_path']
         self.trigger = event['trigger']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__ne__(other)
