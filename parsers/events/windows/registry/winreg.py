@@ -37,6 +37,14 @@ class WindowsDistributedLinkTrackingEventData(general.PlasoGeneralEvent):
         self.origin = origin
         self.uuid = '{0!s}'.format(uuid)
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class WindowsRegistryEventData(general.PlasoGeneralEvent):
     """Windows Registry event data attribute container.
@@ -58,6 +66,14 @@ class WindowsRegistryEventData(general.PlasoGeneralEvent):
 
         if 'values' in event.keys():
             self.values = event['values']
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 
 class WindowsVolumeEventData(general.PlasoGeneralEvent):
@@ -90,4 +106,4 @@ class WindowsVolumeEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)

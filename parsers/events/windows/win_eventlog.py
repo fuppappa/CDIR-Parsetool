@@ -1,4 +1,6 @@
 from parsers.events import general
+import xml.etree.ElementTree as ET
+import re
 
 
 class WinEvtxRecordEventData(general.PlasoGeneralEvent):

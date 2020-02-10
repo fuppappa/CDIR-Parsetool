@@ -53,4 +53,4 @@ class USBStorEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)

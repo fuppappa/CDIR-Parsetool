@@ -65,6 +65,8 @@ def diff(arr1, arr2, comp, result_func):
             if d.mi < len(m) - 1:  # Below
                 tmp = Node(d.mi + 1, d.ni, d_val, d, d, 'b')
                 tmp = snake(m, n, comp, tmp)
+
+                print("snake")
                 if not (tmp.mi, tmp.ni) in dict_map:
                     dict_map[(tmp.mi, tmp.ni)] = True
                 if not (tmp.mi, tmp.ni) in current_d:
@@ -139,6 +141,7 @@ def diff(arr1, arr2, comp, result_func):
 
 
 def default_print_result(result_list, m, n):
+    print("start print")
     i = 0
     mc_count = 0
     ad_count = 0

@@ -97,7 +97,7 @@ class FirefoxPlacesBookmarkEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)
 
 
 # TODO: refactor extra attribute.
@@ -139,7 +139,7 @@ class FirefoxPlacesPageVisitedEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)
 
 
 class FirefoxDownloadEventData(general.PlasoGeneralEvent):
@@ -188,7 +188,7 @@ class FirefoxDownloadEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)
 
 
 """
@@ -237,4 +237,4 @@ class FirefoxCookieEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)

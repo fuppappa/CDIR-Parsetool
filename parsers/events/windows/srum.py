@@ -89,7 +89,7 @@ class SRUMApplicationResourceUsageEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)
 
 
 class SRUMNetworkConnectivityUsageEventData(general.PlasoGeneralEvent):
@@ -133,7 +133,7 @@ class SRUMNetworkConnectivityUsageEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)
 
 
 class SRUMNetworkDataUsageEventData(general.PlasoGeneralEvent):
@@ -165,7 +165,7 @@ class SRUMNetworkDataUsageEventData(general.PlasoGeneralEvent):
         self.interface_luid = None
         self.l2_profile_flags = None
         self.l2_profile_identifier = None
-        self.user_identifier = None
+        self.user_identifier = None 
 
     def SetEventAttribute(self, event):
         self.application = event['application']
@@ -184,4 +184,4 @@ class SRUMNetworkDataUsageEventData(general.PlasoGeneralEvent):
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
-        return not self.__ne__(other)
+        return not self.__eq__(other)
